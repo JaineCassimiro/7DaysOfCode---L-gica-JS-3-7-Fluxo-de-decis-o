@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Despertar do Código</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+            color: white;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .container {
+            margin: 50px auto;
+            width: 80%;
+            max-width: 600px;
+        }
+        .btn {
+            background: #ffcc00;
+            color: black;
+            font-size: 1.2em;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #ffaa00;
+        }
+        .box {
+            margin-top: 20px;
+            font-size: 1.2em;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            border-radius: 10px;
+            display: none;
+        }
+        input, textarea {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: none;
+            font-size: 1em;
+            display: block;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid white;
+        }
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #333;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔥 Despertar do Código 🔥</h1>
+    <p><strong>Caro programador, suas escolhas moldam sua jornada. Explore, aprenda e evolua!</strong></p>
+    
+    <div class="container">
+        <p>Insira seus dados:</p>
+        <input type="text" id="nome" placeholder="Seu nome">
+        <input type="number" id="idade" placeholder="Sua idade">
+        <input type="text" id="linguagem" placeholder="Linguagem que está estudando">
+        <input type="text" id="idiomas" placeholder="Idiomas que você fala">
+        <button class="btn" onclick="registrarDados()">Registrar</button>
+        <div id="dadosUsuario" class="box"></div>
+    </div>
+    
+    <div class="container">
+        <p>Escolha seu caminho:</p>
+        <button class="btn" onclick="escolherCaminho('front')">Front-End</button>
+        <button class="btn" onclick="escolherCaminho('back')">Back-End</button>
+        <div id="resultado" class="box"></div>
+        <div id="narrativa" class="box"></div>
+    </div>
+    
+    <div class="container">
+        <h2>🏆 Ranking dos Jogadores</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Idiomas</th>
+                    <th>Linguagem</th>
+                    <th>Ranking</th>
+                    <th>XP</th>
+                    <th>Conquistas</th>
+                </tr>
+            </thead>
+            <tbody id="ranking"></tbody>
+        </table>
+    </div>
+    
+    <div id="toast" class="toast"></div>
+
+    <script>
+        function showToast(message) {
+            let toast = document.getElementById("toast");
+            toast.innerText = message;
+            toast.style.display = "block";
+            setTimeout(() => { toast.style.display = "none"; }, 3000);
+        }
+
+        function registrarDados() {
+            let nome = document.getElementById("nome").value.trim();
+            let idade = document.getElementById("idade").value.trim();
+            let linguagem = document.getElementById("linguagem").value.trim();
+            let idiomas = document.getElementById("idiomas").value.trim();
+            let dadosUsuario = document.getElementById("dadosUsuario");
+            
+            if (!nome || !idade || !linguagem || !idiomas) {
+                showToast("Preencha todos os campos!");
+                return;
+            }
+            
+            dadosUsuario.style.display = "block";
+            dadosUsuario.innerHTML = `👤 Olá, ${nome}! Você tem ${idade} anos, estuda ${linguagem} e fala ${idiomas}.`;
+            showToast("Dados registrados com sucesso!");
+        }
+        
+        function escolherCaminho(caminho) {
+            let resultado = document.getElementById("resultado");
+            let narrativa = document.getElementById("narrativa");
+            resultado.style.display = "block";
+            narrativa.style.display = "block";
+            
+            if (caminho === 'front') {
+                resultado.innerHTML = "🔥 Você escolheu Front-End! O mestre das interfaces!";
+                narrativa.innerHTML = "Você embarca no mundo visual da web, onde a experiência do usuário é essencial.";
+            } else {
+                resultado.innerHTML = "⚡ Você escolheu Back-End! O mestre dos dados!";
+                narrativa.innerHTML = "Nos bastidores da tecnologia, você comanda servidores e bancos de dados.";
+            }
+            showToast("Caminho escolhido com sucesso!");
+        }
+    </script>
+</body>
+</html>
